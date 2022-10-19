@@ -13,18 +13,18 @@ class MatrixMDPEnv(gym.Env):
     """
     ## Description
 
-    An flexible enfironment to have a gym API for discrete MDPs with `N_s` states and `N_a` actions given:
+    A flexible environment to have a gym API for discrete MDPs with `N_s` states and `N_a` actions given:
      - A vector of initial state distribution P_0(S)
      - A transition probability matrix P(S' | S, A)
-     - A reward vector R(S)
+     - A reward vector R(S, A)
 
     ## Action Space
 
-    The action is a `ndarray` with shape `(1,)` representing the index of the action to execute.
+    The action is an `int` state index.
 
     ## Observation Space
 
-    The observation is a `ndarray` with shape `(1,)` representing index of the state the agent is in.
+    The observation is an `int` state index.
 
     ## Rewards
 
@@ -53,8 +53,7 @@ class MatrixMDPEnv(gym.Env):
 
     ## Version History
 
-    * v0: Initial versions release (1.0.0)
-
+    * v0: Initial versions release
     """
 
     metadata = {
@@ -70,12 +69,14 @@ class MatrixMDPEnv(gym.Env):
         self.observation_space = spaces.Discrete(n=p.shape[0])
         self.states_array = np.arange(p.shape[0])
 
-        # Matrix checks
+        # Check that initial probability matrix sums to 1
         if p_0.sum() != 1:
             raise ValueError("The provided initial probabilities do not sum tp 1.")
+
+        # Check that state transition probabilities sum to O (terminal state) or 1 for every (s, a) pair
         for s in self.states_array:
             for a in np.arange(self.p.shape[2]):
-                if p[:,s,a].sum() != 1:
+                if p[:, s, a].sum() not in [0, 1]:
                     raise ValueError(
                         "The provided transition probabilities are invalid: \sum_s' P(s' | s, a) not in {0, 1}" +\
                         f"for s={s} and a={a}."
@@ -84,22 +85,46 @@ class MatrixMDPEnv(gym.Env):
         self.render_mode = render_mode
 
         # Terminal states are states where no actions lead anywhere
-        self.terminal_states = [s for s in self.states_array if self.p[:, :, s].sum() == 0]
+        self.terminal_states = [s for s in self.states_array if self.p[:, s, :].sum() == 0]
 
         # Initialize the first state
         self.state = np.random.choice(self.states_array, p=self.p_0)
 
-    def step(self, action):
+    def step(self, action: np.ndarray):
+        """
+        Takes a step in the environment.
 
+        Args:
+            action (int): Index of the taken action
+
+        Returns:
+            obs (int): Next state
+            reward (float): The reward for taking the action in the current state
+            done (bool): True if the environment reached a terminal state, otherwise false
+            done (bool): For compatibility with other gymnasium environments
+            info (dict): Always empty, for compatibility with other gymnasium environments
+        """
         new_state = np.random.choice(self.states_array, p=self.p[:, self.state, action])
         reward = self.r[self.state, action]
-        done = (new_state in  self.terminal_states)
+        done = (new_state in self.terminal_states)
 
         if self.render_mode == "human":
             self.render()
         return self._get_obs(), reward, done, done, {}
 
     def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None):
+        """
+        Resets the environment, draws the state from the initial state distribution matrix.
+
+        Args:
+            seed (int?): Seed for random number generator
+            options (dict): To override the random state initialisation, set the start state by giving:
+                options={"start_state": start_state} (e.g. options={"start_state": 0} sets the start state to S0)
+
+        Returns:
+            obs (int): New initial state
+            info (dict): Always empty, for compatibility with other gymnasium environments
+        """
         super().reset(seed=seed)
 
         start_state = np.random.choice(self.states_array, p=self.p_0)
@@ -116,6 +141,12 @@ class MatrixMDPEnv(gym.Env):
         return np.array([self.state, ], dtype=np.int)
 
     def render(self):
+        """
+        Prints environment information in the console.
+
+        Returns:
+
+        """
         if self.render_mode is None:
             gym.logger.warn(
                 "You are calling render method without specifying any render mode. "
