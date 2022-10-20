@@ -70,15 +70,15 @@ class MatrixMDPEnv(gym.Env):
         self.states_array = np.arange(p.shape[0])
 
         # Check that initial probability matrix sums to 1
-        if p_0.sum() != 1:
+        if np.around(p_0.sum(), decimals=6) != 1:
             raise ValueError("The provided initial probabilities do not sum tp 1.")
 
         # Check that state transition probabilities sum to O (terminal state) or 1 for every (s, a) pair
         for s in self.states_array:
             for a in np.arange(self.p.shape[2]):
-                if p[:, s, a].sum() not in [0, 1]:
+                if p[:, s, a].sum() != 0 and np.around(p[:, s, a].sum(), decimals=6) != 1:
                     raise ValueError(
-                        "The provided transition probabilities are invalid: \sum_s' P(s' | s, a) not in {0, 1}" +\
+                        "The provided transition probabilities are invalid: \sum_s' P(s' | s, a) not in {0, 1} " +\
                         f"for s={s} and a={a}."
                     )
 
@@ -93,6 +93,8 @@ class MatrixMDPEnv(gym.Env):
     def step(self, action: np.ndarray):
         """
         Takes a step in the environment.
+        Note: Of the agent executes an invalid action (for which $\\sum_{s'} P(s'|s, a) = 0$), the environment will
+        remain in the current state and both the reward and done flags will be None.
 
         Args:
             action (int): Index of the taken action
@@ -104,10 +106,20 @@ class MatrixMDPEnv(gym.Env):
             done (bool): For compatibility with other gymnasium environments
             info (dict): Always empty, for compatibility with other gymnasium environments
         """
-        new_state = np.random.choice(self.states_array, p=self.p[:, self.state, action])
-        reward = self.r[self.state, action]
-        done = (new_state in self.terminal_states)
+        if self.p[:, self.state, action].sum() == 0:
+            if self.render_mode == "human":
+                print(f"/!\\ Warning: the agent took action {action} invalid in state {self.state}" +\
+                      f"as p[:, s={self.state}, a={action}].sum() == 0 /!\\")
+            new_state = None
+            reward = None
+            done = None
 
+        else:
+            new_state = np.random.choice(self.states_array, p=self.p[:, self.state, action])
+            reward = self.r[self.state, action]
+            done = (new_state in self.terminal_states)
+
+        self.state = new_state
         if self.render_mode == "human":
             self.render()
         return self._get_obs(), reward, done, done, {}
@@ -138,7 +150,13 @@ class MatrixMDPEnv(gym.Env):
         return self._get_obs(), {}
 
     def _get_obs(self):
-        return np.array([self.state, ], dtype=np.int)
+        """
+        Returns the current state of the MDP.
+
+        Returns:
+            obs (int): Current state of the environment
+        """
+        return self.state
 
     def render(self):
         """
