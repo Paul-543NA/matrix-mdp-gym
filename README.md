@@ -1,4 +1,5 @@
 # Matrix MDP
+
 Easily generate an MDP from transition and reward matricies.
 
 ## Installation
@@ -25,25 +26,26 @@ A flexible environment to have a gym API for discrete MDPs with `N_s` states and
 
 ### Action Space
 
-The action is a `ndarray` with shape `(1,)` representing the index of the action to execute.
+The action is an `int` state index.
 
 ### Observation Space
 
-The observation is a `ndarray` with shape `(1,)` representing index of the state the agent is in.
+The observation is an `int` state index.
 
 ### Rewards
 
 The reward function is defined according to the reward matrix given at the creation of the environment.
 
-### Starting State
+### Starting state
 
 The starting state is a random state sampled from $P_0$.
 
 ### Episode Truncation
 
 The episode truncates when a terminal state is reached.
-Terminal states are inferred from the transition probability matrix as
-$\sum_{s' \in S} \sum_{s \in S} \sum_{a \in A} P(s' | s, a) = 0$
+Terminal states are inferred from the transition probability matrix as states that have all leaving
+probabilities to 0, e.g. state s is terminal if:
+$\sum_{s' \in S} \sum_{a \in A} P(s' | s, a) = 0$
 
 ### Arguments
 
@@ -53,7 +55,7 @@ $\sum_{s' \in S} \sum_{s \in S} \sum_{a \in A} P(s' | s, a) = 0$
 
 ```python
 import gymnasium as gym
-gym.make('MatrixMDP-v0', p_0, p, r)
+gym.make('MatrixMDP-v0', p_0=p_0, p=p, r=r)
 ```
 
 ### Version History

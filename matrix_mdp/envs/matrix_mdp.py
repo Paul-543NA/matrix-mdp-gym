@@ -30,15 +30,16 @@ class MatrixMDPEnv(gym.Env):
 
     The reward function is defined according to the reward matrix given at the creation of the environment.
 
-    ## Starting State
+    ## Starting state
 
     The starting state is a random state sampled from $P_0$.
 
     ## Episode Truncation
 
     The episode truncates when a terminal state is reached.
-    Terminal states are inferred from the transition probability matrix as
-    $\sum_{s' \in S} \sum_{s \in S} \sum_{a \in A} P(s' | s, a) = 0$
+    Terminal states are inferred from the transition probability matrix as states that have all leaving
+    probabilities to 0, e.g. state s is terminal if:
+    $\sum_{s' \in S} \sum_{a \in A} P(s' | s, a) = 0$
 
     ## Arguments
 
