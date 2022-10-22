@@ -1,6 +1,6 @@
 import setuptools
 
-_VERSION = "1.0.1"
+_VERSION = "1.0.2"
 
 short_description = "An OpenAI gym / Gymnasium environment to seamlessly create discrete MDPs from matrices."
 
