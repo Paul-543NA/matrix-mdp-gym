@@ -53,7 +53,9 @@ $\sum_{s' \in S} \sum_{s \in S} \sum_{a \in A} P(s' | s, a) = 0$
 
 ```python
 import gymnasium as gym
-gym.make('MatrixMDP-v0', p_0, p, r)
+import matrix_mdp
+
+gym.make('MatrixMDP-v0', p_0=p_0, p=p, r=r)
 ```
 
 ### Version History

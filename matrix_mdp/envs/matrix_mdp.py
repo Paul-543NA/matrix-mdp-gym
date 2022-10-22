@@ -48,7 +48,9 @@ class MatrixMDPEnv(gym.Env):
 
     ```python
     import gymnasium as gym
-    gym.make('MatrixMDP-v0', p_0, p, r)
+    import matrix_mdp
+
+    gym.make('MatrixMDP-v0', p_0=p_0, p=p, r=r)
     ```
 
     ## Version History
