@@ -61,3 +61,7 @@ gym.make('MatrixMDP-v0', p_0=p_0, p=p, r=r)
 ### Version History
 
 * `v0`: Initial versions release
+
+## Acknowledgements
+
+Thanks to [Will Dudley](https://github.com/WillDudley) for his help on learning how to put a Python package together/
