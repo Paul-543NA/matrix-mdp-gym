@@ -14,9 +14,9 @@ class MatrixMDPEnv(gym.Env):
     ## Description
 
     A flexible environment to have a gym API for discrete MDPs with `N_s` states and `N_a` actions given:
-     - A vector of initial state distribution P_0(S)
+     - A vector of initial state distribution vector P_0(S)
      - A transition probability matrix P(S' | S, A)
-     - A reward vector R(S, A)
+     - A reward matrix R(S', S, A) of the reward for reaching S' after having taken action A in state S
 
     ## Action Space
 
@@ -44,7 +44,7 @@ class MatrixMDPEnv(gym.Env):
 
     - `p_à`: `ndarray` of shape `(n_states, )` representing the initial state probability distribution.
     - `p`: `ndarray` of shape `(n_states, n_states, n_actions)` representing the transition dynamics $P(S' | S, A)$.
-    - `r`: `ndarray` of shape `(n_states, n_actions)` representing the reward matrix.
+    - `r`: `ndarray` of shape `(n_states, n_states, n_actions)` representing the reward matrix.
 
     ```python
     import gymnasium as gym
@@ -103,7 +103,7 @@ class MatrixMDPEnv(gym.Env):
 
         Returns:
             obs (int): Next state
-            reward (float): The reward for taking the action in the current state
+            reward (float): The reward for taking the action in the current state and reaching the next state
             done (bool): True if the environment reached a terminal state, otherwise false
             done (bool): For compatibility with other gymnasium environments
             info (dict): Always empty, for compatibility with other gymnasium environments
@@ -118,7 +118,7 @@ class MatrixMDPEnv(gym.Env):
 
         else:
             new_state = np.random.choice(self.states_array, p=self.p[:, self.state, action])
-            reward = self.r[self.state, action]
+            reward = self.r[new_state, self.state, action]
             done = (new_state in self.terminal_states)
 
         self.state = new_state

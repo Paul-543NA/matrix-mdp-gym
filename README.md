@@ -19,9 +19,9 @@ env = gym.make('matrix_mdp/MatrixMDP-v0')
 ### Description
 
 A flexible environment to have a gym API for discrete MDPs with `N_s` states and `N_a` actions given:
- - A vector of initial state distribution P_0(S)
+ - A vector of initial state distribution vector P_0(S)
  - A transition probability matrix P(S' | S, A)
- - A reward vector R(S, A)
+ - A reward matrix R(S', S, A) of the reward for reaching S' after having taken action A in state S
 
 ### Action Space
 
@@ -49,7 +49,7 @@ $\sum_{s' \in S} \sum_{s \in S} \sum_{a \in A} P(s' | s, a) = 0$
 
 - `p_à`: `ndarray` of shape `(n_states, )` representing the initial state probability distribution.
 - `p`: `ndarray` of shape `(n_states, n_states, n_actions)` representing the transition dynamics $P(S' | S, A)$.
-- `r`: `ndarray` of shape `(n_states, n_actions)` representing the reward matrix.
+- `r`: `ndarray` of shape `(n_states, n_states, n_actions)` representing the reward matrix.
 
 ```python
 import gymnasium as gym
