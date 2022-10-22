@@ -4,7 +4,7 @@ Easily generate an MDP from transition and reward matricies.
 ## Installation
 Assuming you are in the root directory of the project, run the following command:
 ```bash
-pip install .
+pip install matrix-mdp-gym
 ```
 
 ## Usage
