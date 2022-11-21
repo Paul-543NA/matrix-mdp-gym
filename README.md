@@ -1,6 +1,9 @@
 # Matrix MDP
 Easily generate an MDP from transition and reward matricies.
 
+Want to learn more on the story behind this repo? Check the blog post [here](https://www.paul-festor.com/post/i-created-a-python-library)!
+
+
 ## Installation
 Assuming you are in the root directory of the project, run the following command:
 ```bash
