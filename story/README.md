@@ -1,6 +1,6 @@
 #  I created a Python library!
 
-![Library logo](./images/./images/header.png)
+![Library logo](./images/header.png)
 
 
 ## The origin
