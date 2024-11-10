@@ -2,7 +2,11 @@
 
 # Matrix MDP
 
-🎉 Celebrating over 10k downloads on pip, thank you! 🎉
+<div style="background-color: #f0f8ff; border-left: 4px solid #4caf50; padding: 10px; margin: 20px 0; border-radius: 5px;">
+    <strong>🎉 Celebration Alert!</strong><br>
+    We are excited to have reached over 10,000 downloads on pip! Thank you for your support!
+</div>
+
 [![Downloads](https://pepy.tech/badge/matrix-mdp-gym)](https://pepy.tech/project/matrix-mdp-gym)
 
 Easily generate an MDP from transition and reward matricies.
