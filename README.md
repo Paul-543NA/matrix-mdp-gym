@@ -1,11 +1,10 @@
 ![Library logo](./story/images/header.png)
 
-# Matrix MDP
-
 [![Downloads](https://pepy.tech/badge/matrix-mdp-gym)](https://pepy.tech/project/matrix-mdp-gym)
 
-<strong>🎉 Celebrating 10,000 downloads on pip, thank you!</strong><br>
+<strong>🎉 Celebrating 10,000 downloads on pip, thank you! 🎉</strong>
 
+# Matrix MDP
 
 Easily generate an MDP from transition and reward matricies.
 
