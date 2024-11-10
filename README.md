@@ -2,7 +2,7 @@
 
 # Matrix MDP
 
-[![Downloads](https://pepy.tech/badge/matrix-mdp-gym)](https://pepy.tech/project/matrix-mdp-
+[![Downloads](https://pepy.tech/badge/matrix-mdp-gym)](https://pepy.tech/project/matrix-mdp-gym)
 
 <strong>🎉 Celebrating 10,000 downloads on pip, thank you!</strong><br>
 
