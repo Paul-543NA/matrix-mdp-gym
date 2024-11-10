@@ -2,9 +2,9 @@
 
 ![Library logo](./images/header.png)
 
-🎉 Celebrating over 10k downloads on pip, thank you! 🎉
-
 [![Downloads](https://pepy.tech/badge/matrix-mdp-gym)](https://pepy.tech/project/matrix-mdp-gym)
+
+<strong>🎉 Celebrating 10,000 downloads on pip, thank you!</strong><br>
 
 ## The origin
 
