@@ -43,8 +43,8 @@ At this point, you could say that this is pretty common for discrete MDPs, and I
 
 As a matter of fact, such environments are used to build intuition for students in the top Reinforcement Learning modules.
 
-![[./images/./images/simple_MDP.png]]
-Example MDP from David Silver's course at UCL
+![Graph of the discrete university MDP example](./images/simple_MDP.png)
+Example MDP from David Silver's course at UCL.
 
 In fact, this discrete environment being so standard and “basic” to implement is probably one of the main reasons why kept implementing it again and again without realising the cost that came with it.
 
@@ -52,7 +52,7 @@ At this point I think: ”Actually, because such environments are so common in R
 
 One more motivation for the project!
 
-![[./images/./images/sketch.png]]
+![Library sketch](images/sketch.png)
 
 ## Finding a standard: gym
 
@@ -80,7 +80,7 @@ Convinced that this would be useful and supported by my friend, I decide to crea
 
 After a few evenings of design, implementation, documentation and online tutorials on how to realise a package on PiPy, my library is out!
 
-![[./images/./images/pypi_screenship.png]]
+![Screenshot of the library on Pypi](./images/pypi_screenship.png)
 
 Special thanks here to Will Dudley who helped raising the final product to more professional standards.
 
