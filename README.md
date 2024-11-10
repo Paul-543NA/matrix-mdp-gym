@@ -4,7 +4,7 @@
 
 <strong>🎉 Celebrating 10,000 downloads on pip, thank you! 🎉</strong>
 
-# Matrix MDP
+# Matrix MDP - A flexible gym environment for discrete MDPs
 
 Easily generate an MDP from transition and reward matricies.
 
