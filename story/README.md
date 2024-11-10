@@ -1,7 +1,9 @@
-#  I created a Python library!
+# I created a Python library to ease the life of RL practitioners !
 
 ![Library logo](./images/header.png)
 
+🎉 Celebrating over 10k downloads on pip, thank you! 🎉
+[![Downloads](https://pepy.tech/badge/matrix-mdp-gym)](https://pepy.tech/project/matrix-mdp-gym)
 
 ## The origin
 

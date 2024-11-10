@@ -1,9 +1,13 @@
+![Library logo](./story/images/header.png)
+
 # Matrix MDP
+
+🎉 Celebrating over 10k downloads on pip, thank you! 🎉
 [![Downloads](https://pepy.tech/badge/matrix-mdp-gym)](https://pepy.tech/project/matrix-mdp-gym)
 
 Easily generate an MDP from transition and reward matricies.
 
-Want to learn more on the story behind this repo? Check the blog post [here](https://www.paul-festor.com/post/i-created-a-python-library)!
+Want to learn more on the story behind this repo? Check the blog post [in the story folder](https://github.com/Paul-543NA/matrix-mdp-gym/blob/main/story/README.md)!
 
 
 ## Installation
